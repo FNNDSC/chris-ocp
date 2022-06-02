@@ -1,0 +1,61 @@
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    name: ChRIS_store PostgreSQL Database
+    role: Chris store database
+  creationTimestamp: null
+  labels:
+    io.kompose.service: chris-store-db
+  name: chris-store-db
+spec:
+  replicas: 1
+  selector:
+    io.kompose.service: chris-store-db
+  strategy:
+    resources: {}
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.network/local: "true"
+        io.kompose.service: chris-store-db
+    spec:
+      containers:
+        - env:
+            - name: POSTGRES_DB
+              value: chris_store
+            - name: POSTGRES_PASSWORD
+              value: Chris1234
+            - name: POSTGRES_USER
+              value: chris
+          image: ' '
+          name: chris_store_db
+          resources: {}
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: chris-store-db-data
+      restartPolicy: Always
+      volumes:
+        - name: chris-store-db-data
+          persistentVolumeClaim:
+            claimName: chris-store-db-data
+  test: false
+  triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+          - chris-store-db
+        from:
+          kind: ImageStreamTag
+          name: chris-store-db:13
+      type: ImageChange
+status:
+  availableReplicas: 0
+  latestVersion: 0
+  observedGeneration: 0
+  replicas: 0
+  unavailableReplicas: 0
+  updatedReplicas: 0

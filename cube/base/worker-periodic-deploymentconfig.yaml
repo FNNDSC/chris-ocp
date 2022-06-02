@@ -1,0 +1,72 @@
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    name: ChRIS_ultron_backEnd Periodic Task Worker
+    role: Backend development periodic task worker
+  creationTimestamp: null
+  labels:
+    io.kompose.service: worker-periodic
+  name: worker-periodic
+spec:
+  replicas: 1
+  selector:
+    io.kompose.service: worker-periodic
+  strategy:
+    resources: {}
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.network/local: "true"
+        io.kompose.service: worker-periodic
+    spec:
+      containers:
+        - args:
+            - celery
+            - -A
+            - core
+            - worker
+            - -c
+            - "1"
+            - -l
+            - DEBUG
+            - -Q
+            - periodic
+          env:
+            - name: DJANGO_COLLECTSTATIC
+              value: "off"
+            - name: DJANGO_DB_MIGRATE
+              value: "off"
+            - name: DJANGO_SETTINGS_MODULE
+              value: config.settings.local
+          image: ' '
+          name: worker_periodic
+          resources: {}
+          volumeMounts:
+            - mountPath: /home/localuser/chris_backend
+              name: worker-periodic-claim0
+      restartPolicy: Always
+      volumes:
+        - name: worker-periodic-claim0
+          persistentVolumeClaim:
+            claimName: worker-periodic-claim0
+  test: false
+  triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+          - worker-periodic
+        from:
+          kind: ImageStreamTag
+          name: worker-periodic:dev
+      type: ImageChange
+status:
+  availableReplicas: 0
+  latestVersion: 0
+  observedGeneration: 0
+  replicas: 0
+  unavailableReplicas: 0
+  updatedReplicas: 0

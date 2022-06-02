@@ -1,0 +1,34 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    name: ChRIS_ultron_backEnd Asynchronous Tasks Worker
+    role: Backend development async task worker
+  creationTimestamp: null
+  labels:
+    io.kompose.service: worker
+  name: worker
+spec:
+  ports:
+    - name: "6900"
+      port: 6900
+      targetPort: 6900
+    - name: "6901"
+      port: 6901
+      targetPort: 6901
+    - name: "6902"
+      port: 6902
+      targetPort: 6902
+    - name: "6903"
+      port: 6903
+      targetPort: 6903
+    - name: "6904"
+      port: 6904
+      targetPort: 6904
+    - name: "6905"
+      port: 6905
+      targetPort: 6905
+  selector:
+    io.kompose.service: worker
+status:
+  loadBalancer: {}
