@@ -25,7 +25,7 @@ services:
       - local
     depends_on:
       - chris_dev
-      - chris_store
+      - chris-store
     #profiles:
       - tools
   chris_dev:
@@ -49,7 +49,7 @@ services:
       - chris_dev_db
       - swift_service
       - queue
-      - chris_store
+      - chris-store
     networks:
       local:
         aliases:
@@ -171,8 +171,8 @@ services:
       name: "ChRIS_ultron_backEnd Asynchronous Task Queue"
       role: "Backend development async task queue"
 
-  chris_store:
-    image: ${STOREREPO}/chris_store
+  chris-store:
+    image: ${STOREREPO}/chris-store
     environment:
       - DJANGO_SETTINGS_MODULE=config.settings.production
       - DJANGO_DB_MIGRATE=on
@@ -182,10 +182,10 @@ services:
       - DJANGO_CORS_ORIGIN_WHITELIST=babymri.org
       - DJANGO_SECURE_PROXY_SSL_HEADER=
       - DJANGO_USE_X_FORWARDED_HOST=false
-      - DATABASE_HOST=chris_store_db
+      - DATABASE_HOST=chris-store-db
       - DATABASE_PORT=5432
       - SWIFT_AUTH_URL=http://swift_service:8080/auth/v1.0
-      - POSTGRES_DB=chris_store
+      - POSTGRES_DB=chris-store
       - POSTGRES_USER=chris
       - POSTGRES_PASSWORD=Chris1234
       - SWIFT_USERNAME=chris:chris1234
@@ -194,28 +194,28 @@ services:
     ports:
       - "8010:8010"
     depends_on:
-      - chris_store_db
+      - chris-store-db
       - swift_service
     networks:
       local:
         aliases:
           - chris-store.local
     labels:
-      name: "ChRIS_store"
+      name: "ChRIS-store"
       role: "Chris store service"
 
-  chris_store_db:
+  chris-store-db:
     image: postgres:13
     volumes:
-      - chris_store_db_data:/var/lib/postgresql/data
+      - chris-store_db_data:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB=chris_store
+      - POSTGRES_DB=chris-store
       - POSTGRES_USER=chris
       - POSTGRES_PASSWORD=Chris1234
     networks:
       - local
     labels:
-      name: "ChRIS_store PostgreSQL Database"
+      name: "ChRIS-store PostgreSQL Database"
       role: "Chris store database"
 
   swift_service:
@@ -242,6 +242,6 @@ networks:
 
 volumes:
   chris_dev_db_data:
-  chris_store_db_data:
+  chris-store-db-data:
   queue_data:
   swift_storage_dev:
