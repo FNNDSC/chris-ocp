@@ -121,12 +121,11 @@ spec:
     image: fnndsc/cube:next-3.0.0.a3.git.0e516b6
     name: worker-periodic
     resources:
-      limits:
-        cpu: "100m"
-        memory: "256Mi"
+      cpu: "200m"
+      memory: "512Mi"
       requests:
-        cpu: "100m"
-        memory: "256Mi"
+        cpu: "200m"
+        memory: "512Mi"
 
   restartPolicy: OnFailure
 status: {}
