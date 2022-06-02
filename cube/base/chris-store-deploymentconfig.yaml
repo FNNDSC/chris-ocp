@@ -13,7 +13,13 @@ spec:
   selector:
     io.kompose.service: chris-store
   strategy:
-    resources: {}
+    resources:
+      limits:
+        cpu: "100m"
+        memory: "256Mi"
+      requests:
+        cpu: "100m"
+        memory: "256Mi"
   template:
     metadata:
       creationTimestamp: null

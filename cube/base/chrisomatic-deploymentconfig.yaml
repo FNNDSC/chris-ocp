@@ -24,7 +24,13 @@ spec:
       containers:
       - image: ' '
         name: chrisomatic
-        resources: {}
+        resources:
+          limits:
+            cpu: "100m"
+            memory: "256Mi"
+          requests:
+            cpu: "100m"
+            memory: "256Mi"
         volumeMounts:
         - mountPath: /etc/chrisomatic/chrisomatic.yml
           name: chrisomatic-claim0

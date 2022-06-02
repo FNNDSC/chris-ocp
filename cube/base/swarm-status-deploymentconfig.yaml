@@ -13,7 +13,13 @@ spec:
   selector:
     io.kompose.service: swarm-status
   strategy:
-    resources: {}
+    resources:
+      limits:
+        cpu: "100m"
+        memory: "256Mi"
+      requests:
+        cpu: "100m"
+        memory: "256Mi"
     type: Recreate
   template:
     metadata:
