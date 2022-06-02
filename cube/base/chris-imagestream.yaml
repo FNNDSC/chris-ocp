@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ImageStream
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: chris
+  name: chris
+spec:
+  tags:
+  - annotations: null
+    from:
+      kind: DockerImage
+      name: fnndsc/cube:next-3.0.0.a3.git.0e516b6
+    generation: null
+    importPolicy: {}
+    name: next-3.0.0.a3.git.0e516b6
+status:
+  dockerImageRepository: ""

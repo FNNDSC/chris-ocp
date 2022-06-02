@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    kompose.cmd: kompose convert --provider openshift --file docker-compose-cube-latest.yaml
+    kompose.version: 1.17.0 (HEAD)
+    org.chrisproject.role: pfcon
+  creationTimestamp: null
+  labels:
+    io.kompose.service: pfcon
+  name: pfcon
+spec:
+  replicas: 1
+  selector:
+    io.kompose.service: pfcon
+  strategy:
+    resources: {}
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.service: pfcon
+    spec:
+      containers:
+      - env:
+        - name: COMPUTE_SERVICE_URL
+          value: http://pman:5010/api/v1/
+        - name: PFCON_PASSWORD
+          value: pfcon1234
+        - name: PFCON_USER
+          value: pfcon
+        - name: SECRET_KEY
+          value: secret
+        image: ' '
+        name: pfcon
+        ports:
+        - containerPort: 5005
+        resources: {}
+        volumeMounts:
+        - mountPath: /var/local/storeBase
+          name: remote
+      restartPolicy: Always
+      volumes:
+      - name: remote
+        persistentVolumeClaim:
+          claimName: remote
+  test: false
+  triggers:
+  - type: ConfigChange
+  - imageChangeParams:
+      automatic: true
+      containerNames:
+      - pfcon
+      from:
+        kind: ImageStreamTag
+        name: pfcon:next-5.0.0.a1.git.6822e96
+    type: ImageChange
+status: {}
