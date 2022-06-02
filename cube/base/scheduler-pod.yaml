@@ -120,12 +120,6 @@ spec:
           name: chris-secrets-env
     image: fnndsc/cube:next-3.0.0.a3.git.0e516b6
     name: scheduler
-    resources:
-      limits:
-        cpu: "800m"
-        memory: "512Mi"
-      requests:
-        cpu: "800m"
-        memory: "512Mi"
+    resources: {}
   restartPolicy: OnFailure
 status: {}
