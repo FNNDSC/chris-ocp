@@ -24,11 +24,11 @@ spec:
     spec:
       containers:
       - env:
-        - name: POSTGRES_DB
+        - name: POSTGRESQL_DATABASE
           value: chris_store
-        - name: POSTGRES_PASSWORD
+        - name: POSTGRESQL_PASSWORD
           value: chirs1234
-        - name: POSTGRES_USER
+        - name: POSTGRESQL_USER
           value: chris
         image: ' '
         name: chris-store-db
