@@ -123,9 +123,9 @@ spec:
     resources:
       limits:
         cpu: "800m"
-        memory: "800Mi"
+        memory: "512Mi"
       requests:
-        cpu: "600m"
-        memory: "400Mi"
+        cpu: "800m"
+        memory: "512Mi"
   restartPolicy: OnFailure
 status: {}
