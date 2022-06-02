@@ -9,6 +9,12 @@ spec:
   containers:
   - image: rabbitmq:3
     name: queue
-    resources: {}
+    resources:
+      limits:
+        cpu: "100m"
+        memory: "256Mi"
+      requests:
+        cpu: "100m"
+        memory: "256Mi"
   restartPolicy: OnFailure
 status: {}
