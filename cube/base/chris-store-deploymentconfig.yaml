@@ -13,13 +13,7 @@ spec:
   selector:
     io.kompose.service: chris-store
   strategy:
-    resources:
-      limits:
-        cpu: "100m"
-        memory: "256Mi"
-      requests:
-        cpu: "100m"
-        memory: "256Mi"
+    resources: {}
   template:
     metadata:
       creationTimestamp: null
@@ -65,7 +59,13 @@ spec:
         name: chris-store
         ports:
         - containerPort: 8010
-        resources: {}
+        resources:
+          limits:
+            cpu: "100m"
+            memory: "256Mi"
+          requests:
+            cpu: "100m"
+            memory: "256Mi"
       restartPolicy: Always
   test: false
   triggers:

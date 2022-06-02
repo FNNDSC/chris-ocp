@@ -13,13 +13,7 @@ spec:
   selector:
     io.kompose.service: chris-ui
   strategy:
-    resources:
-      limits:
-        cpu: "100m"
-        memory: "256Mi"
-      requests:
-        cpu: "100m"
-        memory: "256Mi"
+    resources: {}
   template:
     metadata:
       creationTimestamp: null
@@ -38,7 +32,13 @@ spec:
         name: chris-ui
         ports:
         - containerPort: 3000
-        resources: {}
+        resources:
+          limits:
+            cpu: "100m"
+            memory: "256Mi"
+          requests:
+            cpu: "100m"
+            memory: "256Mi"
       restartPolicy: Always
   test: false
   triggers:

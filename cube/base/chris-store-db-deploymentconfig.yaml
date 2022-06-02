@@ -14,13 +14,7 @@ spec:
   selector:
     io.kompose.service: chris-store-db
   strategy:
-    resources:
-      limits:
-        cpu: "100m"
-        memory: "256Mi"
-      requests:
-        cpu: "100m"
-        memory: "256Mi"
+    resources: {}
     type: Recreate
   template:
     metadata:
@@ -38,7 +32,13 @@ spec:
           value: chris
         image: ' '
         name: chris-store-db
-        resources: {}
+        resources:
+          limits:
+            cpu: "100m"
+            memory: "256Mi"
+          requests:
+            cpu: "100m"
+            memory: "256Mi"
         volumeMounts:
         - mountPath: /var/lib/mysql
           name: chris-store-db-data

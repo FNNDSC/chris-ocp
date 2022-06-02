@@ -14,13 +14,7 @@ spec:
   selector:
     io.kompose.service: pman
   strategy:
-    resources:
-      limits:
-        cpu: "100m"
-        memory: "256Mi"
-      requests:
-        cpu: "100m"
-        memory: "256Mi"
+    resources: {}
     type: Recreate
   template:
     metadata:
@@ -40,7 +34,13 @@ spec:
         name: pman
         ports:
         - containerPort: 5010
-        resources: {}
+        resources:
+          limits:
+            cpu: "100m"
+            memory: "256Mi"
+          requests:
+            cpu: "100m"
+            memory: "256Mi"
         volumeMounts:
         - mountPath: /var/run/docker.sock
           name: pman-claim0

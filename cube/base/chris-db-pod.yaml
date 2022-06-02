@@ -105,7 +105,13 @@ spec:
           name: chris-secrets-env
     image: postgres:13
     name: chris-db
-    resources: {}
+    resources:
+      limits:
+        cpu: "100m"
+        memory: "256Mi"
+      requests:
+        cpu: "100m"
+        memory: "256Mi"
     volumeMounts:
     - mountPath: /var/lib/mysql
       name: chris-db-data

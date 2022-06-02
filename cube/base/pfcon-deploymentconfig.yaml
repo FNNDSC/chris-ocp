@@ -14,13 +14,7 @@ spec:
   selector:
     io.kompose.service: pfcon
   strategy:
-    resources:
-      limits:
-        cpu: "100m"
-        memory: "256Mi"
-      requests:
-        cpu: "100m"
-        memory: "256Mi"
+    resources: {}
   template:
     metadata:
       creationTimestamp: null
@@ -41,7 +35,13 @@ spec:
         name: pfcon
         ports:
         - containerPort: 5005
-        resources: {}
+        resources:
+          limits:
+            cpu: "100m"
+            memory: "256Mi"
+          requests:
+            cpu: "100m"
+            memory: "256Mi"
         volumeMounts:
         - mountPath: /var/local/storeBase
           name: remote
