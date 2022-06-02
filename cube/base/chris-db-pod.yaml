@@ -103,7 +103,9 @@ spec:
         configMapKeyRef:
           key: SWIFT_USERNAME
           name: chris-secrets-env
-    image: postgres:13
+    #image: postgres:13
+    image: docker.io/centos/postgresql-96-centos7
+    imagePullPolicy: IfNotPresent
     name: chris-db
     resources:
       limits:
