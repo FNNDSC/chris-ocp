@@ -11,10 +11,10 @@ spec:
     name: queue
     resources:
       limits:
-        cpu: "800m"
+        cpu: "200m"
         memory: "512Mi"
       requests:
-        cpu: "800m"
+        cpu: "200m"
         memory: "512Mi"
   restartPolicy: OnFailure
 status: {}
