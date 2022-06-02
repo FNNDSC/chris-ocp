@@ -13,13 +13,7 @@ spec:
   selector:
     io.kompose.service: swarm-status
   strategy:
-    resources:
-      limits:
-        cpu: "100m"
-        memory: "256Mi"
-      requests:
-        cpu: "100m"
-        memory: "256Mi"
+    resources: {}
     type: Rolling
   template:
     metadata:
@@ -32,7 +26,13 @@ spec:
         - /entrypoint.sh
         image: ' '
         name: swarm-status
-        resources: {}
+        resources:
+          limits:
+            cpu: "100m"
+            memory: "256Mi"
+          requests:
+            cpu: "100m"
+            memory: "256Mi"
         volumeMounts:
         - mountPath: /var/run/docker.sock
           name: swarm-status-claim0
