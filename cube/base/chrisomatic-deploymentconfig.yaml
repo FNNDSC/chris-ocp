@@ -26,11 +26,11 @@ spec:
         name: chrisomatic
         resources:
           limits:
-            cpu: "100m"
-            memory: "256Mi"
+            cpu: "200m"
+            memory: "512Mi"
           requests:
-            cpu: "100m"
-            memory: "256Mi"
+            cpu: "200m"
+            memory: "512Mi"
         volumeMounts:
         - mountPath: /etc/chrisomatic/chrisomatic.yml
           name: chrisomatic-claim0
