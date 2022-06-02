@@ -15,7 +15,7 @@ spec:
     io.kompose.service: chris-dev
   strategy:
     resources: {}
-    type: Recreate
+    type: Rolling
   template:
     metadata:
       creationTimestamp: null
