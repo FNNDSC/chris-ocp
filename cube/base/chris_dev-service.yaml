@@ -8,7 +8,7 @@ metadata:
   creationTimestamp: null
   labels:
     io.kompose.service: chris-dev
-  name: chris_dev
+  name: chris-dev
 spec:
   ports:
     - name: "8000"

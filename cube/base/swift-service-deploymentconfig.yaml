@@ -1,4 +1,4 @@
-apiVersion: v1
+apiVersion: apps.openshift.io/v1
 kind: DeploymentConfig
 metadata:
   annotations:
@@ -29,7 +29,7 @@ spec:
             - name: SWIFT_USERNAME
               value: chris:chris1234
           image: ' '
-          name: swift_service
+          name: swift-service
           ports:
             - containerPort: 8080
           resources: {}
