@@ -41,11 +41,11 @@ spec:
           value: config.settings.production
         - name: DJANGO_USE_X_FORWARDED_HOST
           value: "false"
-        - name: POSTGRES_DB
+        - name: POSTGRESQL_DATABASE
           value: chris_store
-        - name: POSTGRES_PASSWORD
+        - name: POSTGRESQL_PASSWORD
           value: chirs1234
-        - name: POSTGRES_USER
+        - name: POSTGRESQL_USER
           value: chris
         - name: SWIFT_AUTH_URL
           value: http://swift:8080/auth/v1.0
