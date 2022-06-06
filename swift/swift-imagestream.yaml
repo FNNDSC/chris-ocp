@@ -10,7 +10,8 @@ spec:
   - annotations: null
     from:
       kind: DockerImage
-      name: fnndsc/docker-swift-onlyone:latest
+#      name: fnndsc/docker-swift-onlyone:latest
+      name: registry.redhat.io/rhosp-rhel8/openstack-swift-container
     generation: null
     importPolicy: {}
     name: latest
