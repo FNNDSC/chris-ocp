@@ -1,0 +1,17 @@
+apiVersion: v1
+data:
+  DATABASE_HOST: chris_db
+  DATABASE_PORT: "5432"
+  POSTGRESQL_DATABASE: chris
+  POSTGRESQL_PASSWORD: chris1234
+  POSTGRESQL_USER: chris
+  POSTGRES_DB: chris
+  POSTGRES_USER: chris
+  POSTGRES_PASSWORD: chris1234
+  STATIC_ROOT: /home/localuser/mod_wsgi-0.0.0.0:8000/htdocs/static/
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: chris-secrets-env
+  name: chris-db-secrets-env

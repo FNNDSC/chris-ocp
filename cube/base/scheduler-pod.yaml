@@ -33,12 +33,12 @@ spec:
       valueFrom:
         configMapKeyRef:
           key: DATABASE_HOST
-          name: chris-secrets-env
+          name: chris-db-secrets-env
     - name: DATABASE_PORT
       valueFrom:
         configMapKeyRef:
           key: DATABASE_PORT
-          name: chris-secrets-env
+          name: chris-db-secrets-env
     - name: DJANGO_ALLOWED_HOSTS
       valueFrom:
         configMapKeyRef:
@@ -82,22 +82,22 @@ spec:
       valueFrom:
         configMapKeyRef:
           key: POSTGRESQL_DATABASE
-          name: chris-secrets-env
+          name: chris-db-secrets-env
     - name: POSTGRESQL_PASSWORD
       valueFrom:
         configMapKeyRef:
           key: POSTGRESQL_PASSWORD
-          name: chris-secrets-env
+          name: chris-db-secrets-env
     - name: POSTGRESQL_USER
       valueFrom:
         configMapKeyRef:
           key: POSTGRESQL_USER
-          name: chris-secrets-env
+          name: chris-db-secrets-env
     - name: STATIC_ROOT
       valueFrom:
         configMapKeyRef:
           key: STATIC_ROOT
-          name: chris-secrets-env
+          name: chris-db-secrets-env
     - name: SWIFT_AUTH_URL
       valueFrom:
         configMapKeyRef:
