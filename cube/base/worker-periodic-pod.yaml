@@ -94,7 +94,7 @@ spec:
     - name:  POSTGRESQL_USER
       valueFrom:
         configMapKeyRef:
-          key:  POSTGRESQL_USER
+          key: POSTGRESQL_USER
           name: chris-db-secrets-env
     - name: STATIC_ROOT
       valueFrom:
