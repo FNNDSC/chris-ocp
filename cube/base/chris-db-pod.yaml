@@ -67,17 +67,17 @@ spec:
       valueFrom:
         configMapKeyRef:
           key: POSTGRESQL_DATABASE
-          name: chris-secrets-env
+          name: chris-db-secrets-env
     - name: POSTGRESQL_PASSWORD
       valueFrom:
         configMapKeyRef:
           key: POSTGRESQL_PASSWORD
-          name: chris-secrets-env
+          name: chris-db-secrets-env
     - name:  POSTGRESQL_USER
       valueFrom:
         configMapKeyRef:
           key:  POSTGRESQL_USER
-          name: chris-secrets-env
+          name: chris-db-secrets-env
     - name: POSTGRES_DB
       valueFrom:
         configMapKeyRef:
