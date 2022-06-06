@@ -12,6 +12,4 @@ data:
 kind: ConfigMap
 metadata:
   creationTimestamp: null
-  labels:
-    io.kompose.service: chris-secrets-env
   name: chris-db-secrets-env
