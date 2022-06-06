@@ -80,20 +80,20 @@ spec:
         configMapKeyRef:
           key: DJANGO_USE_X_FORWARDED_HOST
           name: chris-secrets-env
-    - name: POSTGRES_DB
+    - name: POSTGRESQL_DATABASE
       valueFrom:
         configMapKeyRef:
-          key: POSTGRES_DB
+          key: POSTGRESQL_DATABASE
           name: chris-db-secrets-env
-    - name: POSTGRES_PASSWORD
+    - name: POSTGRESQL_PASSWORD
       valueFrom:
         configMapKeyRef:
-          key: POSTGRES_PASSWORD
+          key: POSTGRESQL_PASSWORD
           name: chris-db-secrets-env
-    - name: POSTGRES_USER
+    - name:  POSTGRESQL_USER
       valueFrom:
         configMapKeyRef:
-          key: POSTGRES_USER
+          key:  POSTGRESQL_USER
           name: chris-db-secrets-env
     - name: STATIC_ROOT
       valueFrom:
