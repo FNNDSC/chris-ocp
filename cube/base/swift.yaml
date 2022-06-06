@@ -15,22 +15,6 @@ spec:
       targetPort: 8080
       nodePort: 30080
 ---
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  creationTimestamp: null
-  labels:
-    io.kompose.service: swift-storage
-  name: swift-storage
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 100Mi
-status: {}
-
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -58,12 +42,26 @@ spec:
             - containerPort: 8080
           envFrom:
             - configMapRef:
-                name: swift-config
+                name: chris-secrets-env
           volumeMounts:
             - name: swiftdb
               mountPath: "/srv"
       # Mount a persistent volume onto the Swift object storage
       volumes:
-        - name: swift-storage
+        - name: swiftdb
           persistentVolumeClaim:
-            claimName: swift-storage
+            claimName: swiftdb
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  labels:
+  name: swiftdb
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Mi
+status: {}
