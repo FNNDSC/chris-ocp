@@ -95,6 +95,21 @@ spec:
         configMapKeyRef:
           key:  POSTGRESQL_USER
           name: chris-db-secrets-env
+    - name: POSTGRES_DB
+      valueFrom:
+        configMapKeyRef:
+          key: POSTGRES_DB
+          name: chris-secrets-env
+    - name: POSTGRES_PASSWORD
+      valueFrom:
+        configMapKeyRef:
+          key: POSTGRES_PASSWORD
+          name: chris-secrets-env
+    - name:  POSTGRES_USER
+      valueFrom:
+        configMapKeyRef:
+          key:  POSTGRES_USER
+          name: chris-secrets-env
     - name: STATIC_ROOT
       valueFrom:
         configMapKeyRef:
