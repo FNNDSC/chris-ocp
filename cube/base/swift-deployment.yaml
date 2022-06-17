@@ -25,7 +25,7 @@ spec:
             - containerPort: 8080
           envFrom:
             - configMapRef:
-                name: swift-config
+                name: chris-secrets-env
           volumeMounts:
             - name: swiftdb
               mountPath: "/srv"
