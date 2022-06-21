@@ -11,6 +11,12 @@ spec:
     matchLabels:
       app: swift
       env: production
+strategy:
+  type: Recreate
+  recreateParams: 
+    pre: {} 
+    mid: {}
+    post: {}
   template:
     metadata:
       name: swift
