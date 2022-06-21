@@ -1,0 +1,25 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: swift
+  namespace: chrisproject-dev
+  labels:
+    app.kubernetes.io/instance: chris-smaug
+  annotations:
+    openshift.io/host.generated: 'true'
+spec:
+  host: swift-chrisproject-dev.apps.smaug.na.operate-first.cloud
+  path: /auth/v1.0
+  to:
+    kind: Service
+    name: swift
+    weight: 100
+  port:
+    targetPort: '8080'
+  wildcardPolicy: None
+status:
+  ingress:
+    - host: swift-chrisproject-dev.apps.smaug.na.operate-first.cloud
+      routerName: default
+      wildcardPolicy: None
+      routerCanonicalHostname: router-default.apps.smaug.na.operate-first.cloud
