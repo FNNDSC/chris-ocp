@@ -6,6 +6,7 @@ metadata:
     io.kompose.service: chris-db
   name: chris-db
 spec:
+  serviceAccountName: pipeline
   containers:
   - env:
     - name: CELERY_BROKER_URL

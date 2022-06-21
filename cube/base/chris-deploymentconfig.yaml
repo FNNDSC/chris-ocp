@@ -22,6 +22,7 @@ spec:
       labels:
         io.kompose.service: chris
     spec:
+      serviceAccountName: pipeline
       containers:
       - env:
         - name: CELERY_BROKER_URL
