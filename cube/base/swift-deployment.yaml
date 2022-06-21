@@ -18,6 +18,7 @@ spec:
         app: swift
         env: production
     spec:
+      serviceAccountName: swift
       containers:
         - name: swift
           image: fnndsc/docker-swift-onlyone
