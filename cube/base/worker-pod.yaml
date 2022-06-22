@@ -6,9 +6,6 @@ metadata:
     io.kompose.service: worker
   name: worker
 spec:
-  strategy:
-    resources: { }
-    type: Recreate
   containers:
   - args:
     - celery

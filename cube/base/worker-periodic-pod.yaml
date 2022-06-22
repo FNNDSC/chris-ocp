@@ -6,9 +6,6 @@ metadata:
     io.kompose.service: worker-periodic
   name: worker-periodic
 spec:
-  strategy:
-    resources: {}
-    type: Recreate
   containers:
   - args:
     - celery
