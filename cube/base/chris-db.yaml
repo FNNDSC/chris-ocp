@@ -18,6 +18,7 @@ spec:
         app: chris-db
         env: production
     spec:
+      serviceAccountName: pipeline
       containers:
         - name: chris-db
           image: postgres:13
