@@ -25,7 +25,7 @@ spec:
             - containerPort: 5432
           envFrom:
             - configMapRef:
-                name: chris-db-config
+                name: chris-secrets-env
           volumeMounts:
             - name: chrisdb
               mountPath: "/var/lib/postgresql/data"
