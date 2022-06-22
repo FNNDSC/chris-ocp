@@ -9,7 +9,6 @@ spec:
   strategy:
     resources: {}
     type: Rolling
-  serviceAccountName: pipeline
   containers:
   - args:
     - celery
