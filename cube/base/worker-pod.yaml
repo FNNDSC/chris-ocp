@@ -8,6 +8,7 @@ metadata:
 spec:
   strategy:
     resources: { }
+  serviceAccountName: pipeline
   containers:
   - args:
     - celery
