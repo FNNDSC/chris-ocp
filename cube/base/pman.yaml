@@ -90,7 +90,6 @@ objects:
       test: false
       triggers:
         - type: ConfigChange
----
   - apiVersion: v1
     kind: Service
     metadata:
@@ -108,7 +107,6 @@ objects:
         deploymentconfig: pman
       sessionAffinity: None
       type: ClusterIP
----
   - apiVersion: v1
     kind: Route
     metadata:
