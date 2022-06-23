@@ -29,7 +29,7 @@ spec:
                 name: chris-secrets-env
           volumeMounts:
             - name: chrisdb
-              mountPath: "/var/lib/postgresql/data"
+              mountPath: "/var/lib/postgresql"
       # Mount a persistent volume onto ChRIS DB
       volumes:
         - name: chrisdb
