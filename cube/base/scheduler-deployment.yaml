@@ -3,19 +3,21 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    app: deploymentname
-  name: deploymentname
+    app: scheduler
+    env: production
+  name: scheduler
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: deploymentname
+      app: scheduler
   strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: deploymentname
+        app: scheduler
+        env: production
     spec:
   containers:
     - args:
