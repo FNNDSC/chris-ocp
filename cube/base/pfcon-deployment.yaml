@@ -39,15 +39,16 @@ spec:
             requests:
               cpu: "100m"
               memory: "256Mi"
-          volumeMounts:
-            - mountPath: /var/local/storeBase
-              name: remote
+        volumeMounts:
+          - mountPath: /var/local/storeBase
+            name: remote
       restartPolicy: Always
       volumes:
         - name: remote
           persistentVolumeClaim:
             claimName: remote
-      - image: fnndsc/pfcon:next-5.0.0.a1.git.6822e96
-        name: pfcon
+          volumeMounts:
+            - mountPath: /var/local/storeBase
+              name: remote
         resources: {}
 status: {}
