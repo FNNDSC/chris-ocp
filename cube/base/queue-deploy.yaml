@@ -19,6 +19,7 @@ spec:
         app: queue
         env: production
     spec:
+      serviceAccountName: pipeline
       containers:
         - name: queue
           image: rabbitmq:3
