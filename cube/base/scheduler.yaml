@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name:
+  name: scheduler
   labels:
-    app:
+    app: scheduler
     env: production
 spec:
   replicas: 1
@@ -13,7 +13,7 @@ spec:
       env: production
   template:
     metadata:
-      name:
+      name: scheduler
       labels:
         app: scheduler
         env: production
