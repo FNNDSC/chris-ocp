@@ -21,6 +21,7 @@ spec:
       labels:
         io.kompose.service: pfcon
     spec:
+      serviceAccountName: pipeline
       containers:
       - env:
         - name: COMPUTE_SERVICE_URL
