@@ -10,7 +10,7 @@ spec:
   - annotations: null
     from:
       kind: DockerImage
-      name: fnndsc/pfcon:next-5.0.0.a1.git.6822e96
+      name: fnndsc/pfcon
     generation: null
     importPolicy: {}
     name: next-5.0.0.a1.git.6822e96
