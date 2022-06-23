@@ -1,20 +1,31 @@
-apiVersion: v1
-kind: Pod
+
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  creationTimestamp: null
-  labels:
-    io.kompose.service: queue
   name: queue
+  labels:
+    app: queue
+    env: production
 spec:
-  containers:
-    - image: rabbitmq:3
+  replicas: 1
+  selector:
+    matchLabels:
+      app: queue
+      env: production
+  template:
+    metadata:
       name: queue
-      resources:
-        limits:
-          cpu: "200m"
-          memory: "512Mi"
-        requests:
-          cpu: "200m"
-          memory: "512Mi"
-  restartPolicy: OnFailure
-status: {}
+      labels:
+        app: queue
+        env: production
+    spec:
+      containers:
+        - name: queue
+          image: rabbitmq:3
+          resources:
+            limits:
+              cpu: "200m"
+              memory: "512Mi"
+            requests:
+              cpu: "200m"
+              memory: "512Mi"
