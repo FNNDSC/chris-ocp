@@ -22,6 +22,7 @@ spec:
       labels:
         io.kompose.service: pman
     spec:
+      serviceAccountName: pipeline
       containers:
       - command:
         - /entrypoint.sh
