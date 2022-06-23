@@ -44,14 +44,14 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: CHRIS_STORE_URL
-                  name: chris-db-secrets-env
+                  name: chris-secrets-env
             - name: SWIFT_AUTH_URL
               valueFrom:
                 configMapKeyRef:
                   key: SWIFT_AUTH_URL
-                  name: chris-db-secrets-env
+                  name: chris-secrets-env
             - name: CELERY_BROKER_URL
               valueFrom:
                 configMapKeyRef:
                   key: CELERY_BROKER_URL
-                  name: chris-db-secrets-env
+                  name: chris-secrets-env
