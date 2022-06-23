@@ -28,7 +28,7 @@ spec:
               value: pfcon
             - name: SECRET_KEY
               value: secret
-          image: ' '
+          image: 'fnndsc/pfcon'
           name: pfcon
           ports:
             - containerPort: 5005
@@ -47,7 +47,5 @@ spec:
         - name: remote
           persistentVolumeClaim:
             claimName: remote
-        - image: fnndsc/pfcon
-          name: pfcon
           resources: {}
 status: {}
