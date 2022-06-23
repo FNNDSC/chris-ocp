@@ -1,18 +1,67 @@
-apiVersion: image.openshift.io/v1
 kind: ImageStream
+apiVersion: image.openshift.io/v1
 metadata:
-  creationTimestamp: null
-  labels:
-    io.kompose.service: chris
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: >
+      {"apiVersion":"image.openshift.io/v1","kind":"ImageStream","metadata":{"annotations":{},"creationTimestamp":null,"labels":{"app.kubernetes.io/instance":"chris-smaug","io.kompose.service":"chris"},"name":"chris","namespace":"chrisproject-dev"},"spec":{"tags":[{"annotations":null,"from":{"kind":"DockerImage","name":"fnndsc/cube:next-3.0.0.a3.git.0e516b6"},"generation":null,"importPolicy":{},"name":"next-3.0.0.a3.git.0e516b6"}]},"status":{"dockerImageRepository":""}}
+  resourceVersion: '1167115524'
   name: chris
+  creationTimestamp: '2022-06-23T10:34:50Z'
+  generation: 2
+  managedFields:
+    - manager: argocd-application-controller
+      operation: Update
+      apiVersion: image.openshift.io/v1
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            .: {}
+            'f:kubectl.kubernetes.io/last-applied-configuration': {}
+          'f:labels':
+            .: {}
+            'f:app.kubernetes.io/instance': {}
+            'f:io.kompose.service': {}
+        'f:spec':
+          'f:tags':
+            .: {}
+            'k:{"name":"next-3.0.0.a3.git.0e516b6"}':
+              .: {}
+              'f:annotations': {}
+              'f:from': {}
+              'f:generation': {}
+              'f:importPolicy': {}
+              'f:name': {}
+              'f:referencePolicy':
+                .: {}
+                'f:type': {}
+        'f:status':
+          'f:dockerImageRepository': {}
+  namespace: chrisproject-dev
+  labels:
+    app.kubernetes.io/instance: chris-smaug
+    io.kompose.service: chris
 spec:
+  lookupPolicy:
+    local: false
   tags:
-  - annotations: null
-    from:
-      kind: DockerImage
-      name: fnndsc/cube:next-3.0.0.a3.git.0e516b6
-    generation: null
-    importPolicy: {}
-    name: next-3.0.0.a3.git.0e516b6
+    - name: next-3.0.0.a3.git.0e516b6
+      annotations: null
+      from:
+        kind: DockerImage
+        name: 'fnndsc/cube:next-3.0.0.a3.git.0e516b6'
+      generation: 2
+      importPolicy: {}
+      referencePolicy:
+        type: Source
 status:
-  dockerImageRepository: ""
+  dockerImageRepository: 'image-registry.openshift-image-registry.svc:5000/chrisproject-dev/chris'
+  tags:
+    - tag: next-3.0.0.a3.git.0e516b6
+      items:
+        - created: '2022-06-23T10:34:51Z'
+          dockerImageReference: >-
+            fnndsc/cube@sha256:c00946a90a5842d68c907d235e577ba41e9982f0b6e5039dae7b82ecfb0c3d87
+          image: >-
+            sha256:c00946a90a5842d68c907d235e577ba41e9982f0b6e5039dae7b82ecfb0c3d87
+          generation: 2
