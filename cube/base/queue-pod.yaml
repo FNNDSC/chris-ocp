@@ -18,18 +18,3 @@ spec:
           memory: "512Mi"
   restartPolicy: OnFailure
 status: {}
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: queue
-  labels:
-    app: queue
-    env: production
-spec:
-  selector:
-    app: queue
-    env: production
-  ports:
-    - port: 5672
-      targetPort: 5672
