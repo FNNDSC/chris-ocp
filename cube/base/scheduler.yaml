@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scheduler
+  labels:
+    app: scheduler
+    env: production
+spec:
+  replicas: 1  # stateful service, so only a single replica must be used
+  selector:
+    matchLabels:
+      app: scheduler
+      env: production
+  template:
+    metadata:
+      name: scheduler
+      labels:
+        app: scheduler
+        env: production
+    spec:
+      containers:
+        - name: scheduler
+          image: fnndsc/chris
+          args: [
+            "celery", "-A", "core", "beat", "-l", "info", "--pidfile", "/home/localuser/celerybeat.pid",
+            "--scheduler", "django_celery_beat.schedulers:DatabaseScheduler"
+          ]
+          env:
+            - name: DJANGO_DB_MIGRATE
+              value: "off"
+            - name: DJANGO_COLLECTSTATIC
+              value: "off"
+            - name: DATABASE_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: DATABASE_HOST
+                  name: chris-db-secrets-env
+            - name: DATABASE_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: DATABASE_PORT
+                  name: chris-db-secrets-env
+            - name: CHRIS_STORE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: CHRIS_STORE_URL
+                  name: chris-db-secrets-env
+            - name: SWIFT_AUTH_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: SWIFT_AUTH_URL
+                  name: chris-db-secrets-env
+            - name: CELERY_BROKER_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: CELERY_BROKER_URL
+                  name: chris-db-secrets-env
