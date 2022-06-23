@@ -1,12 +1,11 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Pod
 metadata:
   creationTimestamp: null
   labels:
-    app: scheduler
+    io.kompose.service: scheduler
   name: scheduler
 spec:
-  serviceAccountName: pipeline
   containers:
     - args:
         - celery
@@ -143,19 +142,5 @@ spec:
         requests:
           cpu: "100m"
           memory: "256Mi"
-  replicas: 1
-  selector:
-    matchLabels:
-      app: scheduler
-  strategy: {}
-  template:
-    metadata:
-      creationTimestamp: null
-      labels:
-        app: scheduler
-    spec:
-      containers:
-        - image: fnndsc/cube:next-3.0.0.a3.git.0e516b6
-          name: scheduler
-          resources: {}
+  restartPolicy: OnFailure
 status: {}
