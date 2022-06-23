@@ -32,12 +32,22 @@ spec:
           name: pfcon
           ports:
             - containerPort: 5005
-        volumeMounts:
-          - mountPath: /var/local/storeBase
-            name: remote
-      restartPolicy: Always
+          resources:
+            limits:
+              cpu: "100m"
+              memory: "256Mi"
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
           volumeMounts:
             - mountPath: /var/local/storeBase
               name: remote
-        resources: {}
+      restartPolicy: Always
+      volumes:
+        - name: remote
+          persistentVolumeClaim:
+            claimName: remote
+        - image: fnndsc/pfcon:next-5.0.0.a1.git.6822e96
+          name: pfcon
+          resources: {}
 status: {}
