@@ -7,12 +7,23 @@ metadata:
   name: chris
 spec:
   tags:
-    - annotations: null
+    - name: next-3.0.0.a3.git.0e516b6
+      annotations: null
       from:
         kind: DockerImage
-        name: fnndsc/cube:next-3.0.0.a3.git.0e516b6
-      generation: null
+        name: 'fnndsc/cube:next-3.0.0.a3.git.0e516b6'
+      generation: 2
       importPolicy: {}
-      name: next-3.0.0.a3.git.0e516b6
+      referencePolicy:
+        type: Source
 status:
-  dockerImageRepository: ""
+  dockerImageRepository: "image-registry.openshift-image-registry.svc:5000/chrisproject-dev/chris"
+  tags:
+    - tag: next-3.0.0.a3.git.0e516b6
+      items:
+        - created: '2022-06-23T13:29:54Z'
+          dockerImageReference: >-
+            fnndsc/cube@sha256:c00946a90a5842d68c907d235e577ba41e9982f0b6e5039dae7b82ecfb0c3d87
+          image: >-
+            sha256:c00946a90a5842d68c907d235e577ba41e9982f0b6e5039dae7b82ecfb0c3d87
+          generation: 2
