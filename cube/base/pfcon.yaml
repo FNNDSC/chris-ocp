@@ -14,9 +14,7 @@ spec:
     - port: 5009
       targetPort: 5009
       nodePort: 30009
-
 ---
-
 apiVersion: apps/v1
 kind: Deployment
 metadata:
