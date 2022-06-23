@@ -21,7 +21,7 @@ status:
   tags:
     - tag: next-3.0.0.a3.git.0e516b6
       items:
-        - created: '2022-06-23T13:29:54Z'
+        - created:
           dockerImageReference: >-
             fnndsc/cube@sha256:c00946a90a5842d68c907d235e577ba41e9982f0b6e5039dae7b82ecfb0c3d87
           image: >-
