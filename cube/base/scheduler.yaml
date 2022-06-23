@@ -6,9 +6,6 @@ metadata:
     io.kompose.service: scheduler
   name: scheduler
 spec:
-  strategy:
-    resources: { }
-    type: Recreate
   containers:
     - args:
         - celery
