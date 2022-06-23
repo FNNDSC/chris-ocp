@@ -47,7 +47,7 @@ spec:
         - name: remote
           persistentVolumeClaim:
             claimName: remote
-        - image: fnndsc/pfcon:next-5.0.0.a1.git.6822e96
+        - image: fnndsc/pfcon
           name: pfcon
           resources: {}
 status: {}
