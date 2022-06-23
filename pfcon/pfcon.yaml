@@ -58,3 +58,18 @@ spec:
         - name: storebase
           persistentVolumeClaim:
             claimName: storebase
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: pfcon
+  name: storebase
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1GB
+status: {}
