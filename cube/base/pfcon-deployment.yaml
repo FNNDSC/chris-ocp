@@ -36,10 +36,6 @@ spec:
           - mountPath: /var/local/storeBase
             name: remote
       restartPolicy: Always
-      volumes:
-        - name: remote
-          persistentVolumeClaim:
-            claimName: remote
           volumeMounts:
             - mountPath: /var/local/storeBase
               name: remote
