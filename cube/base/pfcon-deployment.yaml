@@ -32,13 +32,6 @@ spec:
           name: pfcon
           ports:
             - containerPort: 5005
-          resources:
-            limits:
-              cpu: "100m"
-              memory: "256Mi"
-            requests:
-              cpu: "100m"
-              memory: "256Mi"
         volumeMounts:
           - mountPath: /var/local/storeBase
             name: remote
