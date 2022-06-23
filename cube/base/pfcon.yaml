@@ -11,9 +11,9 @@ spec:
     app: pfcon
     env: production
   ports:
-    - port: 5005
-      targetPort: 5005
-      nodePort: 30005
+    - port: 5009
+      targetPort: 5009
+      nodePort: 30009
 
 ---
 
