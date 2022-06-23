@@ -47,5 +47,7 @@ spec:
         - name: remote
           persistentVolumeClaim:
             claimName: remote
+        - emptyDir: {}
+          name: pfcon
           resources: {}
 status: {}
