@@ -2,9 +2,6 @@ apiVersion: apps.openshift.io/v1
 kind: DeploymentConfig
 metadata:
   annotations:
-    kompose.cmd: kompose convert --provider openshift --file docker-compose-cube-latest.yaml
-    kompose.version: 1.17.0 (HEAD)
-    org.chrisproject.role: pman
   creationTimestamp: null
   labels:
     io.kompose.service: pman

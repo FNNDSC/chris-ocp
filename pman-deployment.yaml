@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: pman
+  name: pman
+spec:
+  serviceAccountName: pipeline
+  containers:
+    - command:
+        - /entrypoint.sh
+      env:
+        - name: CONTAINER_ENV
+          value: swarm
+        - name: SECRET_KEY
+          value: secret
+      image: ' '
+      name: pman
+      ports:
+        - containerPort: 5010
+      resources:
+        limits:
+          cpu: "100m"
+          memory: "256Mi"
+        requests:
+          cpu: "100m"
+          memory: "256Mi"
+      volumeMounts:
+        - mountPath: /var/run/docker.sock
+          name: pman-claim0
+        - mountPath: /entrypoint.sh
+          name: pman-claim1
+          readOnly: true
+      restartPolicy: Always
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pman
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: pman
+    spec:
+      containers:
+      - image: fnndsc/pman
+        name: pman
+        resources: {}
+status: {}

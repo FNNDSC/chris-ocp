@@ -4,17 +4,17 @@ metadata:
   annotations:
     kompose.cmd: kompose convert --provider openshift --file docker-compose-cube-latest.yaml
     kompose.version: 1.17.0 (HEAD)
-    org.chrisproject.role: pfcon
+    org.chrisproject.role: pman
   creationTimestamp: null
   labels:
-    io.kompose.service: pfcon
-  name: pfcon
+    io.kompose.service: pman
+  name: pman
 spec:
   ports:
-  - name: "5005"
-    port: 5005
-    targetPort: 5005
+  - name: "5010"
+    port: 5010
+    targetPort: 5010
   selector:
-    io.kompose.service: pfcon
+    io.kompose.service: pman
 status:
   loadBalancer: {}
