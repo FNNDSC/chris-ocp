@@ -135,7 +135,7 @@ spec:
                 configMapKeyRef:
                   key: SWIFT_USERNAME
                   name: chris-secrets-env
-          image: 'chris:next-3.0.0.a3.git.0e516b6 '
+          image: 'fnndsc/cube:next-3.0.0.a3.git.0e516b6'
           name: chris
           ports:
             - containerPort: 8000
