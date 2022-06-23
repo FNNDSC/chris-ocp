@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: queue
+  labels:
+    app: queue
+    env: production
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: queue
+      env: production
+  template:
+    metadata:
+      name: queue
+      labels:
+        app: queue
+        env: production
+    spec:
+      serviceAccountName: pipeline
+      containers:
+        - name: queue
+          image: rabbitmq:3
+          resources:
+            limits:
+              cpu: "200m"
+              memory: "512Mi"
+            requests:
+              cpu: "200m"
+              memory: "512Mi"
