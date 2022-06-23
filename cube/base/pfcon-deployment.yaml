@@ -28,7 +28,7 @@ spec:
               value: pfcon
             - name: SECRET_KEY
               value: secret
-          image: 'fnndsc/pfcon'
+          image: fnndsc/pfcon
           name: pfcon
           ports:
             - containerPort: 5005
