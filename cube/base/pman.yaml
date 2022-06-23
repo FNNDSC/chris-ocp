@@ -1,6 +1,6 @@
 ---
 kind: Template
-apiVersion: template.openshift.io/v1)
+apiVersion: template.openshift.io/v1
 metadata:
   name: pman-openshift
   annotations:
@@ -90,35 +90,5 @@ objects:
       test: false
       triggers:
         - type: ConfigChange
-  - apiVersion: v1
-    kind: Service
-    metadata:
-      labels:
-        app: pman
-      name: pman
-    spec:
-      ports:
-        - name: 5010-tcp
-          port: 5010
-          protocol: TCP
-          targetPort: 5010
-      selector:
-        app: pman
-        deploymentconfig: pman
-      sessionAffinity: None
-      type: ClusterIP
-  - apiVersion: v1
-    kind: Route
-    metadata:
-      annotations:
-        openshift.io/host.generated: 'true'
-      name: pman
-    spec:
-      port:
-        targetPort: 5010-tcp
-      to:
-        kind: Service
-        name: pman
-        weight: 100
 labels:
   template: application-template-pman-openshift
