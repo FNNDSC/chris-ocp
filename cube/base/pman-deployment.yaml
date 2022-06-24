@@ -16,7 +16,7 @@ spec:
         - name: SECRET_KEY
           value: secret
         - name: STOREBASE
-          value: "/tmp/"
+          value: /tmp/
       image: ' '
       name: pman
       ports:
