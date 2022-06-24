@@ -21,14 +21,16 @@ spec:
     spec:
       serviceAccountName: pipeline
       containers:
-      - command:
-        - /entrypoint.sh
+      - command: ["gunicorn"]
+        args: ["-w", "5", "-b", "0.0.0.0:30010", "-t",  "200", "pman.wsgi:application"]
         env:
         - name: CONTAINER_ENV
           value: swarm
         - name: SECRET_KEY
           value: secret
-        image: ' '
+        - name: STOREBASE
+          value: /var/local/storeBase
+        image: 'fnndsc/pman'
         name: pman
         ports:
         - containerPort: 5010
@@ -45,6 +47,8 @@ spec:
         - mountPath: /entrypoint.sh
           name: pman-claim1
           readOnly: true
+        - mountPath: /var/local/storeBase
+          name: pman-storebase
       restartPolicy: Always
       volumes:
       - name: pman-claim0
@@ -54,15 +58,7 @@ spec:
         persistentVolumeClaim:
           claimName: pman-claim1
           readOnly: true
-  test: false
-  triggers:
-  - type: ConfigChange
-  - imageChangeParams:
-      automatic: true
-      containerNames:
-      - pman
-      from:
-        kind: ImageStreamTag
-        name: pman:next-4.0.0.a1.git.c245243
-    type: ImageChange
+      - name: pman-storebase
+        persistentVolumeClaim:
+          claimName: pman-storebase  
 status: {}
