@@ -29,7 +29,7 @@ spec:
               value: chirs1234
             - name: POSTGRES_USER
               value: chris
-          image: ' '
+          image: 'postgres:13'
           name: chris_store_db
           resources: {}
           volumeMounts:
