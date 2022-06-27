@@ -25,23 +25,12 @@ spec:
           env:
             - name: REACT_APP_STORE_URL
               value: http://localhost:8010/api/v1/
-          image: ' '
+          image: 'docker.io/fnndsc/chris_store_ui:0.2.0-rc.1'
           name: chris_store_ui
           ports:
             - containerPort: 3000
           resources: {}
       restartPolicy: Always
-  test: false
-  triggers:
-    - type: ConfigChange
-    - imageChangeParams:
-        automatic: true
-        containerNames:
-          - chris-store-ui
-        from:
-          kind: ImageStreamTag
-          name: chris-store-ui:0.2.0-rc.1
-      type: ImageChange
 status:
   availableReplicas: 0
   latestVersion: 0
