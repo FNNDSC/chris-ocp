@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ImageStream
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: pfcon
+  name: pfcon
+spec:
+  lookupPolicy:
+    local: false
+  tags:
+    - annotations: null
+      from:
+        kind: DockerImage
+        name: fnndsc/pfcon:next-5.0.0.a1.git.6822e96
+      generation: null
+      importPolicy: {}
+      name: next-5.0.0.a1.git.6822e96
+      referencePolicy:
+        type: ""
+status:
+  dockerImageRepository: ""

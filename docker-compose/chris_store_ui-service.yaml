@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: chris-store-ui
+  name: chris_store_ui
+spec:
+  ports:
+    - name: "8021"
+      port: 8021
+      targetPort: 3000
+  selector:
+    io.kompose.service: chris-store-ui
+status:
+  loadBalancer: {}

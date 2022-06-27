@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ImageStream
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: chris-store-ui
+  name: chris-store-ui
+spec:
+  lookupPolicy:
+    local: false
+  tags:
+    - annotations: null
+      from:
+        kind: DockerImage
+        name: docker.io/fnndsc/chris_store_ui:0.2.0-rc.1
+      generation: null
+      importPolicy: {}
+      name: 0.2.0-rc.1
+      referencePolicy:
+        type: ""
+status:
+  dockerImageRepository: ""

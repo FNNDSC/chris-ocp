@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: chris-ui
+  name: chris_ui
+spec:
+  ports:
+    - name: "8020"
+      port: 8020
+      targetPort: 3000
+  selector:
+    io.kompose.service: chris-ui
+status:
+  loadBalancer: {}

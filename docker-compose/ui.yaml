@@ -1,0 +1,215 @@
+# an ephemeral instance of ChRIS backend services for local development
+#
+# warning: /var/run/docker.sock is mounted into some services (notably pman)
+
+version: '3'
+
+services:
+  chris:
+    container_name: chris
+    image: fnndsc/cube:next-3.0.0.a9
+    ports:
+      - "8000:8000"
+    depends_on:
+      - chris_db
+      - swift
+      - queue
+    networks:
+      - local
+    env_file: secrets.env
+    environment:
+      DJANGO_DB_MIGRATE: "on"
+      DJANGO_COLLECTSTATIC: "on"
+    labels:
+      org.chrisproject.role: "ChRIS ultron backEnd"
+      org.chrisproject.miniChRIS: "miniChRIS"
+  worker:
+    image: fnndsc/cube:next-3.0.0.a9
+    command: celery -A core worker -c 4 -l info -Q main1,main2
+    env_file: secrets.env
+    environment:
+      DJANGO_DB_MIGRATE: "off"
+      DJANGO_COLLECTSTATIC: "off"
+    depends_on:
+      - chris_db
+      - swift
+      - queue
+      - pfcon
+    restart: on-failure
+    networks:
+      - local
+  worker_periodic:
+    image: fnndsc/cube:next-3.0.0.a9
+    environment:
+      DJANGO_DB_MIGRATE: "off"
+      DJANGO_COLLECTSTATIC: "off"
+    command: celery -A core worker -c 2 -l info -Q periodic
+    env_file: secrets.env
+    depends_on:
+      - chris_db
+      - queue
+    restart: on-failure
+    networks:
+      - local
+  scheduler:
+    image: fnndsc/cube:next-3.0.0.a9
+    command: celery -A core beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler
+    env_file: secrets.env
+    environment:
+      DJANGO_DB_MIGRATE: "off"
+      DJANGO_COLLECTSTATIC: "off"
+    depends_on:
+      - chris_db
+      - queue
+    restart: on-failure
+    networks:
+      - local
+  chris_db:
+    image: postgres:13
+    env_file: secrets.env
+    restart: on-failure
+    volumes:
+      - chris_db_data:/var/lib/mysql
+    networks:
+      - local
+  queue:
+    image: rabbitmq:3
+    restart: on-failure
+    networks:
+      - local
+
+  chris_store:
+    container_name: chris_store
+    image: ghcr.io/fnndsc/chris_store:2.0.1
+    environment:
+      - DJANGO_DB_MIGRATE=on
+      - DJANGO_SETTINGS_MODULE=config.settings.production
+      - DJANGO_ALLOWED_HOSTS=*
+      - DJANGO_SECRET_KEY=secret
+      - DJANGO_CORS_ORIGIN_ALLOW_ALL=true
+      - DJANGO_CORS_ORIGIN_WHITELIST=babymri.org
+      - DJANGO_SECURE_PROXY_SSL_HEADER=
+      - DJANGO_USE_X_FORWARDED_HOST=false
+      - DATABASE_HOST=chris_store_db
+      - DATABASE_PORT=5432
+      - POSTGRES_DB=chris_store
+      - POSTGRES_USER=chris
+      - POSTGRES_PASSWORD=chirs1234
+      - SWIFT_AUTH_URL=http://swift:8080/auth/v1.0
+      - SWIFT_USERNAME=chris:chris1234
+      - SWIFT_KEY=testing
+      - SWIFT_CONTAINER_NAME=store_users
+    ports:
+      - "8010:8010"
+    depends_on:
+      - chris_store_db
+      - swift
+    networks:
+      local:
+        aliases:
+          - chrisstore.local
+  chris_store_db:
+    image: postgres:13
+    environment:
+      - POSTGRES_DB=chris_store
+      - POSTGRES_USER=chris
+      - POSTGRES_PASSWORD=chirs1234
+    volumes:
+      - chris_store_db_data:/var/lib/mysql
+    networks:
+      - local
+    labels:
+      name: "ChRIS_store MySQL Database"
+
+  swift:
+    image: fnndsc/docker-swift-onlyone:latest
+#    init: true
+    environment:
+      - SWIFT_USERNAME=chris:chris1234
+      - SWIFT_KEY=testing
+    ports:
+      - "8080:8080"
+    volumes:
+      - swift_storage:/srv
+    networks:
+      - local
+
+  pfcon:
+    container_name: pfcon
+    image: fnndsc/pfcon:next-5.0.0.a1.git.6822e96
+    environment:
+      COMPUTE_SERVICE_URL: http://pman:5010/api/v1/
+      SECRET_KEY: secret
+      PFCON_USER: pfcon
+      PFCON_PASSWORD: pfcon1234
+    ports:
+      - "5005:5005"
+    volumes:
+      - remote:/var/local/storeBase
+    networks:
+      local:
+        aliases:
+          - pfcon.host
+      remote:
+    labels:
+      org.chrisproject.role: "pfcon"
+
+  pman:
+    image: fnndsc/pman:next-4.0.0.a1.git.c245243
+    container_name: pman
+    environment:
+      CONTAINER_ENV: swarm
+      SECRET_KEY: secret
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:rw
+      - ./workarounds/storebase.sh:/entrypoint.sh:ro
+    entrypoint: /entrypoint.sh
+    depends_on:
+      - swarm-status
+      - pfcon
+    ports:
+      - "5010:5010"
+    networks:
+      - remote
+    userns_mode: "host"
+    labels:
+      org.chrisproject.role: "pman"
+
+  chris_ui:
+    image: ghcr.io/fnndsc/chris_ui:20220601
+    command: sirv --quiet --single
+    environment:
+      REACT_APP_CHRIS_UI_URL: http://localhost:8000/api/v1/
+    ports:
+      - "8020:3000"
+  chris_store_ui:
+    image: docker.io/fnndsc/chris_store_ui:0.2.0-rc.1
+    command: sirv --quiet --single
+    environment:
+      REACT_APP_STORE_URL: http://localhost:8010/api/v1/
+    ports:
+      - "8021:3000"
+
+  # ====================
+  # Provisioning
+  # ====================
+
+  # start docker swarm for pman
+  swarm-status:
+    image: docker
+    container_name: swarm-status
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./workarounds/swarm.sh:/entrypoint.sh
+    userns_mode: "host"
+    entrypoint: /entrypoint.sh
+
+networks:
+  local:
+  remote:
+
+volumes:
+  chris_db_data:
+  chris_store_db_data:
+  swift_storage:
+  remote:

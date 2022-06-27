@@ -1,0 +1,69 @@
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  annotations:
+    org.chrisproject.role: pman
+  creationTimestamp: null
+  labels:
+    io.kompose.service: pman
+  name: pman
+spec:
+  replicas: 1
+  selector:
+    io.kompose.service: pman
+  strategy:
+    resources: {}
+    type: Recreate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.network/remote: "true"
+        io.kompose.service: pman
+    spec:
+      containers:
+        - command:
+            - /entrypoint.sh
+          env:
+            - name: CONTAINER_ENV
+              value: swarm
+            - name: SECRET_KEY
+              value: secret
+          image: ' '
+          name: pman
+          ports:
+            - containerPort: 5010
+          resources: {}
+          volumeMounts:
+            - mountPath: /var/run/docker.sock
+              name: pman-claim0
+            - mountPath: /entrypoint.sh
+              name: pman-claim1
+              readOnly: true
+      restartPolicy: Always
+      volumes:
+        - name: pman-claim0
+          persistentVolumeClaim:
+            claimName: pman-claim0
+        - name: pman-claim1
+          persistentVolumeClaim:
+            claimName: pman-claim1
+            readOnly: true
+  test: false
+  triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+          - pman
+        from:
+          kind: ImageStreamTag
+          name: pman:next-4.0.0.a1.git.c245243
+      type: ImageChange
+status:
+  availableReplicas: 0
+  latestVersion: 0
+  observedGeneration: 0
+  replicas: 0
+  unavailableReplicas: 0
+  updatedReplicas: 0

@@ -1,0 +1,79 @@
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: chris-store
+  name: chris-store
+spec:
+  replicas: 1
+  selector:
+    io.kompose.service: chris-store
+  strategy:
+    resources: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        io.kompose.network/local: "true"
+        io.kompose.service: chris-store
+    spec:
+      containers:
+        - env:
+            - name: DATABASE_HOST
+              value: chris_store_db
+            - name: DATABASE_PORT
+              value: "5432"
+            - name: DJANGO_ALLOWED_HOSTS
+              value: '*'
+            - name: DJANGO_CORS_ORIGIN_ALLOW_ALL
+              value: "true"
+            - name: DJANGO_CORS_ORIGIN_WHITELIST
+              value: babymri.org
+            - name: DJANGO_DB_MIGRATE
+              value: "on"
+            - name: DJANGO_SECRET_KEY
+              value: secret
+            - name: DJANGO_SECURE_PROXY_SSL_HEADER
+            - name: DJANGO_SETTINGS_MODULE
+              value: config.settings.production
+            - name: DJANGO_USE_X_FORWARDED_HOST
+              value: "false"
+            - name: POSTGRES_DB
+              value: chris_store
+            - name: POSTGRES_PASSWORD
+              value: chirs1234
+            - name: POSTGRES_USER
+              value: chris
+            - name: SWIFT_AUTH_URL
+              value: http://swift:8080/auth/v1.0
+            - name: SWIFT_CONTAINER_NAME
+              value: store_users
+            - name: SWIFT_KEY
+              value: testing
+            - name: SWIFT_USERNAME
+              value: chris:chris1234
+          image: ' '
+          name: chris-store
+          ports:
+            - containerPort: 8010
+          resources: {}
+      restartPolicy: Always
+  test: false
+  triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+          - chris_store
+        from:
+          kind: ImageStreamTag
+          name: chris-store:2.0.1
+      type: ImageChange
+status:
+  availableReplicas: 0
+  latestVersion: 0
+  observedGeneration: 0
+  replicas: 0
+  unavailableReplicas: 0
+  updatedReplicas: 0
