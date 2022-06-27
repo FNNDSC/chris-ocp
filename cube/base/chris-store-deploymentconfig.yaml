@@ -53,23 +53,12 @@ spec:
               value: testing
             - name: SWIFT_USERNAME
               value: chris:chris1234
-          image: ' '
+          image: 'ghcr.io/fnndsc/chris_store:2.0.1'
           name: chris-store
           ports:
             - containerPort: 8010
           resources: {}
       restartPolicy: Always
-  test: false
-  triggers:
-    - type: ConfigChange
-    - imageChangeParams:
-        automatic: true
-        containerNames:
-          - chris_store
-        from:
-          kind: ImageStreamTag
-          name: chris-store:2.0.1
-      type: ImageChange
 status:
   availableReplicas: 0
   latestVersion: 0
