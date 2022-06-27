@@ -6,48 +6,53 @@ metadata:
     app: pman
   name: pman
 spec:
-  serviceAccountName: pipeline
-  containers:
-    - command:
-        - /entrypoint.sh
-      env:
-        - name: CONTAINER_ENV
-          value: swarm
-        - name: SECRET_KEY
-          value: key4
-        - name: STOREBASE
-          value: /tmp/
-      image: ' '
-      name: pman
-      ports:
-        - containerPort: 5010
-      resources:
-        limits:
-          cpu: "100m"
-          memory: "256Mi"
-        requests:
-          cpu: "100m"
-          memory: "256Mi"
-      volumeMounts:
-        - mountPath: /var/run/docker.sock
-          name: pman-claim0
-        - mountPath: /entrypoint.sh
-          name: pman-claim1
-          readOnly: true
-      restartPolicy: Always
   replicas: 1
+  stategy: {}
   selector:
     matchLabels:
       app: pman
-  strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
         app: pman
     spec:
+      serviceAccountName: pipeline
       containers:
-        - image: fnndsc/pman
-          name: pman
-          resources: {}
+      - command: ["gunicorn"]
+        args: ["-w", "5", "-b", "0.0.0.0:30010", "-t",  "200", "pman.wsgi:application"]
+        envFrom:
+          - configMapRef:
+              name: chris-secrets-env
+        image: 'fnndsc/pman'
+        name: pman
+        ports:
+        - containerPort: 5010
+        resources:
+          limits:
+            cpu: "100m"
+            memory: "256Mi"
+          requests:
+            cpu: "100m"
+            memory: "256Mi"
+        volumeMounts:
+        - mountPath: /var/run/docker.sock
+          name: pman-claim0
+        - mountPath: /entrypoint.sh
+          name: pman-claim1
+          readOnly: true
+        - mountPath: /var/local/storeBase
+          name: pman-storebase
+      restartPolicy: Always
+      volumes:
+      - name: pman-claim0
+        persistentVolumeClaim:
+          claimName: pman-claim0
+      - name: pman-claim1
+        persistentVolumeClaim:
+          claimName: pman-claim1
+          readOnly: true
+      - name: pman-storebase
+        persistentVolumeClaim:
+          claimName: pman-storebase  
 status: {}
