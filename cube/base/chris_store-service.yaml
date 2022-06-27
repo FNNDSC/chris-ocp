@@ -4,7 +4,7 @@ metadata:
   creationTimestamp: null
   labels:
     io.kompose.service: chris-store
-  name: chris_store
+  name: chris-store
 spec:
   ports:
     - name: "8010"

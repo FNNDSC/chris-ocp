@@ -4,7 +4,7 @@ metadata:
   creationTimestamp: null
   labels:
     io.kompose.service: chris-ui
-  name: chris_ui
+  name: chris-ui
 spec:
   ports:
     - name: "8020"
