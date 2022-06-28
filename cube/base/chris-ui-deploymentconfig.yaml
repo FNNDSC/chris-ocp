@@ -26,7 +26,7 @@ spec:
           env:
             - name: REACT-APP-CHRIS-UI-URL
               value: http://chris-ui:8020/api/v1/
-          image: 'ghcr.io/fnndsc/chris_ui:20220601'
+          image: 'ghcr.io/fnndsc/chris_ui:3ca97e3'
           name: chris-ui
           ports:
             - containerPort: 3000
