@@ -7,7 +7,7 @@ metadata:
   name: pman
 spec:
   replicas: 1
-  stategy: {}
+  strategy: {}
   selector:
     matchLabels:
       app: pman
