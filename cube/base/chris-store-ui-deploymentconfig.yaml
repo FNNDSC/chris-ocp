@@ -18,6 +18,7 @@ spec:
       labels:
         io.kompose.service: chris-store-ui
     spec:
+      serviceAccountName: pipeline
       containers:
         - args:
             - sirv
