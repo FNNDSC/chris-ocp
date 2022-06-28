@@ -23,7 +23,7 @@ spec:
             - --quiet
             - --single
           env:
-            - name: REACT_APP_CHRIS_UI_URL
+            - name: REACT-APP-CHRIS-UI-URL
               value: http://localhost:8000/api/v1/
           image: 'ghcr.io/fnndsc/chris_ui:20220601'
           name: chris_ui
