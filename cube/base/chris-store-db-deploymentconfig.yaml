@@ -42,42 +42,4 @@ spec:
           persistentVolumeClaim:
             claimName: chris-store-db-data
 status: {}
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: chris-store-db
-  labels:
-    app: chris-store-db
-    env: production
-spec:
-  replicas: 1  # stateful service, so only a single replica must be used
-  selector:
-    matchLabels:
-      app: chris-store-db
-      env: production
-  template:
-    metadata:
-      name: chris-store-db
-      labels:
-        app: chris-db
-        env: production
-    spec:
-      serviceAccountName: pipeline
-      containers:
-        - name: chris-store-db
-          image: postgres:13
-          ports:
-            - containerPort: 5432
-          envFrom:
-            - configMapRef:
-                name: chris-secrets-env
-          volumeMounts:
-            - name: chrisdb
-              mountPath: "/var/lib/postgresql"
-      # Mount a persistent volume onto ChRIS DB
-      volumes:
-        - name: chrisdb
-          persistentVolumeClaim:
-            claimName: chrisdb
 
