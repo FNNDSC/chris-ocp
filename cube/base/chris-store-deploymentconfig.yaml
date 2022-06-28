@@ -3,7 +3,6 @@ kind: DeploymentConfig
 metadata:
   creationTimestamp: null
   labels:
-    io.kompose.service: chris-store
   name: chris-store
 spec:
   replicas: 1
@@ -23,7 +22,7 @@ spec:
       containers:
         - env:
             - name: DATABASE_HOST
-              value: chris_store_db
+              value: chris-store-db
             - name: DATABASE_PORT
               value: "5432"
             - name: DJANGO_ALLOWED_HOSTS

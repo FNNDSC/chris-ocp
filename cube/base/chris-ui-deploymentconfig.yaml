@@ -3,7 +3,6 @@ kind: DeploymentConfig
 metadata:
   creationTimestamp: null
   labels:
-    io.kompose.service: chris-ui
   name: chris-ui
 spec:
   replicas: 1
@@ -11,7 +10,6 @@ spec:
     io.kompose.service: chris-ui
   strategy:
     resources: {}
-    type: Rolling
   template:
     metadata:
       creationTimestamp: null
