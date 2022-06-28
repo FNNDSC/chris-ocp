@@ -11,7 +11,7 @@ spec:
     io.kompose.service: chris
   strategy:
     resources: {}
-    type: Rolling
+    type: RollingUpdate
   template:
     metadata:
       creationTimestamp: null

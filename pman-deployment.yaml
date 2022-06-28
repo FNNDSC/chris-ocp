@@ -39,7 +39,7 @@ spec:
       app: pman
   strategy:
   resources: { }
-  type: Rolling
+  type: RollingUpdate
   template:
     metadata:
       creationTimestamp: null

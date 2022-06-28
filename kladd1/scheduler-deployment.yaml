@@ -13,7 +13,7 @@ spec:
       app: scheduler
   strategy:
     resources: { }
-    type: Rolling
+    type: RollingUpdate
   template:
     metadata:
       creationTimestamp: null

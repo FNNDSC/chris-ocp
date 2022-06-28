@@ -8,7 +8,7 @@ metadata:
 spec:
   strategy:
     resources: { }
-    type: Rolling
+    type: RollingUpdate
   containers:
   - args:
     - celery
