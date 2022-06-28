@@ -25,24 +25,13 @@ spec:
             - --single
           env:
             - name: REACT_APP_CHRIS_UI_URL
-              value: http://localhost:8000/api/v1/
-          image: ' '
+              value: http://chris-ui:8020/api/v1/
+          image: ghcr.io/fnndsc/chris_ui:20220601
           name: chris_ui
           ports:
             - containerPort: 3000
           resources: {}
       restartPolicy: Always
-  test: false
-  triggers:
-    - type: ConfigChange
-    - imageChangeParams:
-        automatic: true
-        containerNames:
-          - chris-ui
-        from:
-          kind: ImageStreamTag
-          name: chris-ui:20220601
-      type: ImageChange
 status:
   availableReplicas: 0
   latestVersion: 0
