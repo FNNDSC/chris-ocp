@@ -26,7 +26,7 @@ spec:
             - --single
           env:
             - name: REACT_APP_CHRIS_UI_URL
-              value: http://chris-ui:8020/api/v1/
+              value: http://cube-chrisproject-dev.apps.smaug.na.operate-first.cloud
           image: 'ghcr.io/fnndsc/chris_ui:3ca97e3'
           name: chris-ui
           ports:
