@@ -24,7 +24,7 @@ spec:
             - --quiet
             - --single
           env:
-            - name: REACT-APP-CHRIS-UI-URL
+            - name: REACT_APP_CHRIS_UI_URL
               value: http://chris-ui:8020/api/v1/
           image: 'ghcr.io/fnndsc/chris_ui:3ca97e3'
           name: chris-ui
