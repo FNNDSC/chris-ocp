@@ -5,8 +5,11 @@ metadata:
     openshift.io/host.generated: 'true'
   labels:
     app.kubernetes.io/instance: chris-smaug
+    io.kompose.service: chris-store-ui
+  managedFields:
   name: chris-store-ui
   namespace: chrisproject-dev
+  resourceVersion: '1191946481'
 spec:
   host: chris-store-ui-chrisproject-dev.apps.smaug.na.operate-first.cloud
   port:
