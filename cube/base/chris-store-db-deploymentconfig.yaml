@@ -51,10 +51,4 @@ spec:
           kind: ImageStreamTag
           name: chris-store-db:13
       type: ImageChange
-status:
-  availableReplicas: 0
-  latestVersion: 0
-  observedGeneration: 0
-  replicas: 0
-  unavailableReplicas: 0
-  updatedReplicas: 0
+status: {}
