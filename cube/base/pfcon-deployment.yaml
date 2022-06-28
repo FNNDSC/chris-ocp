@@ -12,7 +12,7 @@ spec:
       app: pfcon
   strategy:
     resources: { }
-    type: RollingUpdateUpdate
+    type: RollingUpdate
   template:
     metadata:
       creationTimestamp: null
