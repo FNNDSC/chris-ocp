@@ -51,5 +51,4 @@ spec:
             claimName: remote
         - emptyDir: {}
           name: pfcon
-          resources: {}
 status: {}
