@@ -4,19 +4,16 @@ metadata:
   name: chris-store-db
   labels:
     app: chris-store-db
-    env: production
 spec:
   replicas: 1  # stateful service, so only a single replica must be used
   selector:
     matchLabels:
       app: chris-store-db
-      env: production
   template:
     metadata:
       name: chris-store-db
       labels:
         app: chris-store-db
-        env: production
     spec:
       serviceAccountName: pipeline
       containers:
@@ -35,3 +32,4 @@ spec:
         - name: chrisdb
           persistentVolumeClaim:
             claimName: chris-store-db-data
+
