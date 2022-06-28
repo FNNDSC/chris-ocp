@@ -5,6 +5,8 @@ metadata:
     openshift.io/host.generated: 'true'
   labels:
     app.kubernetes.io/instance: chris-smaug
+  name: chris-store-ui
+  namespace: chrisproject-dev
 spec:
   host: chris-store-ui-chrisproject-dev.apps.smaug.na.operate-first.cloud
   port:
