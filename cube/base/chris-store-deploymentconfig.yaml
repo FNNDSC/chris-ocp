@@ -27,6 +27,12 @@ spec:
                 name: chris-store-ui-secrets-env
           ports:
             - containerPort: 8010
-          resources: {}
+          resources:
+            limits:
+              cpu: "100m"
+              memory: "256Mi"
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
       restartPolicy: Always
 status: {}

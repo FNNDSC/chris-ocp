@@ -21,6 +21,13 @@ spec:
           image: postgres:13
           ports:
             - containerPort: 5432
+          resources:
+            limits:
+              cpu: "100m"
+              memory: "256Mi"
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
           envFrom:
             - configMapRef:
                 name: chris-store-db-secrets-env

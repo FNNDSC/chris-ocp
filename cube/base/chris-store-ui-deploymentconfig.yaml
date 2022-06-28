@@ -30,6 +30,12 @@ spec:
           name: chris-store-ui
           ports:
             - containerPort: 3000
-          resources: {}
+          resources:
+            limits:
+              cpu: "100m"
+              memory: "256Mi"
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
       restartPolicy: Always
 status: {}
