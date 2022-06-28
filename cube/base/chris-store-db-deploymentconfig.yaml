@@ -21,6 +21,7 @@ spec:
         io.kompose.network/local: "true"
         io.kompose.service: chris-store-db
     spec:
+      serviceAccountName: pipeline
       containers:
         - env:
             - name: POSTGRES_DB
@@ -29,7 +30,7 @@ spec:
               value: chirs1234
             - name: POSTGRES_USER
               value: chris
-          image: 'postgres:13'
+          image: postgres:13
           name: chris-store-db
           resources: {}
           volumeMounts:
@@ -40,15 +41,43 @@ spec:
         - name: chris-store-db-data
           persistentVolumeClaim:
             claimName: chris-store-db-data
-  test: false
-  triggers:
-    - type: ConfigChange
-    - imageChangeParams:
-        automatic: true
-        containerNames:
-          - chris-store-db
-        from:
-          kind: ImageStreamTag
-          name: chris-store-db:13
-      type: ImageChange
 status: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: chris-store-db
+  labels:
+    app: chris-store-db
+    env: production
+spec:
+  replicas: 1  # stateful service, so only a single replica must be used
+  selector:
+    matchLabels:
+      app: chris-store-db
+      env: production
+  template:
+    metadata:
+      name: chris-store-db
+      labels:
+        app: chris-db
+        env: production
+    spec:
+      serviceAccountName: pipeline
+      containers:
+        - name: chris-store-db
+          image: postgres:13
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - configMapRef:
+                name: chris-secrets-env
+          volumeMounts:
+            - name: chrisdb
+              mountPath: "/var/lib/postgresql"
+      # Mount a persistent volume onto ChRIS DB
+      volumes:
+        - name: chrisdb
+          persistentVolumeClaim:
+            claimName: chrisdb
+

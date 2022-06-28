@@ -54,7 +54,7 @@ spec:
               value: testing
             - name: SWIFT_USERNAME
               value: chris:chris1234
-          image: 'ghcr.io/fnndsc/chris_store:2.0.1'
+          image: ghcr.io/fnndsc/chris_store:latest
           name: chris-store
           ports:
             - containerPort: 8010
