@@ -24,6 +24,9 @@ metadata:
             'f:name': {}
             'f:weight': {}
           'f:wildcardPolicy': {}
+      manager: Mozilla
+      operation: Update
+      time: '2022-06-28T20:30:56Z'
     - apiVersion: route.openshift.io/v1
       fieldsType: FieldsV1
       fieldsV1:
@@ -35,6 +38,7 @@ metadata:
       time: '2022-06-28T20:30:56Z'
   name: chris-store-ui
   namespace: chrisproject-dev
+  resourceVersion: 'null'
 spec:
   host: chris-store-ui-chrisproject-dev.apps.smaug.na.operate-first.cloud
   port:
