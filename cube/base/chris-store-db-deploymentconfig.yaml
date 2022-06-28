@@ -1,45 +1,37 @@
-apiVersion: apps.openshift.io/v1
-kind: DeploymentConfig
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  annotations:
-    name: ChRIS_store MySQL Database
-  creationTimestamp: null
-  labels:
-    io.kompose.service: chris-store-db
   name: chris-store-db
+  labels:
+    app: chris-store-db
+    env: production
 spec:
-  replicas: 1
+  replicas: 1  # stateful service, so only a single replica must be used
   selector:
-    io.kompose.service: chris-store-db
-  strategy:
-    resources: {}
-    type: Rolling
+    matchLabels:
+      app: chris-store-db
+      env: production
   template:
     metadata:
-      creationTimestamp: null
+      name: chris-store-db
       labels:
-        io.kompose.network/local: "true"
-        io.kompose.service: chris-store-db
+        app: chris-store-db
+        env: production
     spec:
       serviceAccountName: pipeline
       containers:
-        - env:
-            - name: POSTGRES_DB
-              value: chris_store
-            - name: POSTGRES_PASSWORD
-              value: chirs1234
-            - name: POSTGRES_USER
-              value: chris
+        - name: chris-store-db
           image: postgres:13
-          name: chris-store-db
-          resources: {}
+          ports:
+            - containerPort: 5432
+          envFrom:
+            - configMapRef:
+                name: chris-secrets-env
           volumeMounts:
-            - mountPath: /var/lib/mysql
-              name: chris-store-db-data
-      restartPolicy: Always
+            - name: chrisdb
+              mountPath: "/var/lib/postgresql"
+      # Mount a persistent volume onto ChRIS DB
       volumes:
-        - name: chris-store-db-data
+        - name: chrisdb
           persistentVolumeClaim:
             claimName: chris-store-db-data
-status: {}
-
