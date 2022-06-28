@@ -11,7 +11,9 @@ spec:
   selector:
     matchLabels:
       app: scheduler
-  strategy: {}
+  strategy:
+    resources: { }
+    type: Rolling
   template:
     metadata:
       creationTimestamp: null

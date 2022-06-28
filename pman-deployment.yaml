@@ -37,7 +37,9 @@ spec:
   selector:
     matchLabels:
       app: pman
-  strategy: {}
+  strategy:
+  resources: { }
+  type: Rolling
   template:
     metadata:
       creationTimestamp: null

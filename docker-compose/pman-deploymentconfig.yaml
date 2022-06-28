@@ -13,7 +13,7 @@ spec:
     io.kompose.service: pman
   strategy:
     resources: {}
-    type: Recreate
+    type: Rolling
   template:
     metadata:
       creationTimestamp: null

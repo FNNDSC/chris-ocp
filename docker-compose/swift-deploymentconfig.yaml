@@ -11,7 +11,7 @@ spec:
     io.kompose.service: swift
   strategy:
     resources: {}
-    type: Recreate
+    type: Rolling
   template:
     metadata:
       creationTimestamp: null

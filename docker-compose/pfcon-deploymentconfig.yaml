@@ -13,7 +13,7 @@ spec:
     io.kompose.service: pfcon
   strategy:
     resources: {}
-    type: Recreate
+    type: Rolling
   template:
     metadata:
       creationTimestamp: null

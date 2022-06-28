@@ -10,7 +10,9 @@ spec:
   selector:
     matchLabels:
       app: pfcon
-  strategy: {}
+  strategy:
+    resources: { }
+    type: Rolling
   template:
     metadata:
       creationTimestamp: null

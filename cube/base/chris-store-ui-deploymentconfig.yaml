@@ -11,6 +11,7 @@ spec:
     io.kompose.service: chris-store-ui
   strategy:
     resources: {}
+    type: Rolling
   template:
     metadata:
       creationTimestamp: null
