@@ -1,8 +1,9 @@
-apiVersion: apps.openshift.io/v1
+apiVersion: v1
 kind: DeploymentConfig
 metadata:
   creationTimestamp: null
   labels:
+    io.kompose.service: chris-ui
   name: chris-ui
 spec:
   replicas: 1
@@ -10,25 +11,42 @@ spec:
     io.kompose.service: chris-ui
   strategy:
     resources: {}
+    type: RollingUpdate
   template:
     metadata:
       creationTimestamp: null
       labels:
         io.kompose.service: chris-ui
     spec:
-      serviceAccountName: pipeline
       containers:
         - args:
             - sirv
             - --quiet
             - --single
           env:
-            - name: REACT-APP-CHRIS-UI-URL
+            - name: REACT_APP_CHRIS_UI_URL
               value: http://localhost:8000/api/v1/
-          image: ghcr.io/fnndsc/chris_ui:latest
-          name: chris-ui
+          image: ' '
+          name: chris_ui
           ports:
             - containerPort: 3000
           resources: {}
       restartPolicy: Always
-status: {}
+  test: false
+  triggers:
+    - type: ConfigChange
+    - imageChangeParams:
+        automatic: true
+        containerNames:
+          - chris-ui
+        from:
+          kind: ImageStreamTag
+          name: chris-ui:20220601
+      type: ImageChange
+status:
+  availableReplicas: 0
+  latestVersion: 0
+  observedGeneration: 0
+  replicas: 0
+  unavailableReplicas: 0
+  updatedReplicas: 0
