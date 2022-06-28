@@ -20,42 +20,11 @@ spec:
     spec:
       serviceAccountName: pipeline
       containers:
-        - env:
-            - name: DATABASE_HOST
-              value: chris-store-db
-            - name: DATABASE_PORT
-              value: "5432"
-            - name: DJANGO_ALLOWED_HOSTS
-              value: '*'
-            - name: DJANGO_CORS_ORIGIN_ALLOW_ALL
-              value: "true"
-            - name: DJANGO_CORS_ORIGIN_WHITELIST
-              value: babymri.org
-            - name: DJANGO_DB_MIGRATE
-              value: "on"
-            - name: DJANGO_SECRET_KEY
-              value: secret
-            - name: DJANGO_SECURE_PROXY_SSL_HEADER
-            - name: DJANGO_SETTINGS_MODULE
-              value: config.settings.production
-            - name: DJANGO_USE_X_FORWARDED_HOST
-              value: "false"
-            - name: POSTGRES_DB
-              value: chris_store
-            - name: POSTGRES_PASSWORD
-              value: chirs1234
-            - name: POSTGRES_USER
-              value: chris
-            - name: SWIFT_AUTH_URL
-              value: http://swift:8080/auth/v1.0
-            - name: SWIFT_CONTAINER_NAME
-              value: store_users
-            - name: SWIFT_KEY
-              value: testing
-            - name: SWIFT_USERNAME
-              value: chris:chris1234
+        - name: chris-store
           image: ghcr.io/fnndsc/chris_store:latest
-          name: chris-store
+          envFrom:
+            - configMapRef:
+                name: chris-store-ui-secrets-env
           ports:
             - containerPort: 8010
           resources: {}

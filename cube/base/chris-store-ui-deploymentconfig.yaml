@@ -25,7 +25,7 @@ spec:
             - --single
           env:
             - name: REACT-APP-STORE-URL
-              value: http://localhost:8010/api/v1/
+              value: http://chris-store:8010/api/v1/
           image: docker.io/fnndsc/chris_store_ui:latest
           name: chris-store-ui
           ports:
