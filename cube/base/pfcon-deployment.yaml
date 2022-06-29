@@ -12,7 +12,7 @@ spec:
       app: pfcon
   strategy:
     resources: { }
-    type: Recreate
+    type: RollingUpdate
   template:
     metadata:
       creationTimestamp: null
