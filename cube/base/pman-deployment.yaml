@@ -32,10 +32,10 @@ spec:
         - containerPort: 30010
         resources:
           limits:
-            cpu: "100m"
+            cpu: "500m"
             memory: "256Mi"
           requests:
-            cpu: "100m"
+            cpu: "500m"
             memory: "256Mi"
         volumeMounts:
         - mountPath: /var/run/docker.sock
