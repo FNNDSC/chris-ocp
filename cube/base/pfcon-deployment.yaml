@@ -34,7 +34,7 @@ spec:
           name: pfcon
           ports:
             - containerPort: 5005
-          command: ["/usr/local/bin/pfcon","--verbosity=5","--port=5005"]
+          command: ["gunicorn", "-w", "5", "-b", "0.0.0.0:30005", "-t",  "200", "pfcon.wsgi:application"]
           resources:
             limits:
               cpu: "200m"
