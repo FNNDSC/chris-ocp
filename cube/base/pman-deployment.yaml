@@ -26,7 +26,7 @@ spec:
         envFrom:
           - configMapRef:
               name: chris-secrets-env
-        image: 'fnndsc/pman'
+        image: 'fnndsc/pman:next-4.0.0.a1.git.c245243'
         name: pman
         ports:
         - containerPort: 30010
