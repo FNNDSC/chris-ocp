@@ -21,6 +21,8 @@ spec:
     spec:
       serviceAccountName: pipeline
       containers:
+      - command: [""]
+#        args: ["-w", "5", "-b", "0.0.0.0:30010", "-t",  "200", "pman.wsgi:application"]
         envFrom:
           - configMapRef:
               name: chris-secrets-env
