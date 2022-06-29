@@ -27,7 +27,7 @@ spec:
         image: 'fnndsc/pman'
         name: pman
         ports:
-        - containerPort: 5010
+        - containerPort: 30010
         resources:
           limits:
             cpu: "100m"
