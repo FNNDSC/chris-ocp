@@ -30,7 +30,7 @@ spec:
               value: pfcon
             - name: SECRET_KEY
               value: secret
-          image: ghcr.io/sandip117/pfcon:flask
+          image: ghcr.io/fnndsc/pfcon:next-5.0.0.a1.git.154d938
           name: pfcon
           ports:
             - containerPort: 5005
