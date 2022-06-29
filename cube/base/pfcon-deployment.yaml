@@ -34,7 +34,7 @@ spec:
           name: pfcon
           ports:
             - containerPort: 5005
-          args: ["--forever", "--httpResponse", "--verbosity", "1"]
+          args: ["--httpResponse", "--verbosity", "1"]
           resources:
             limits:
               cpu: "200m"
