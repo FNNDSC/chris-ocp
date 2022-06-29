@@ -21,7 +21,7 @@ spec:
     spec:
       serviceAccountName: pipeline
       containers:
-      - command: ["gunicorn", "--bind", "0.0.0.0:5010", "--workers", "8", "--timeout", "20", "pman.wsgi:application"]
+      - command: ["gunicorn", "--bind", "0.0.0.0:5010", "--workers", "2", "--timeout", "20", "pman.wsgi:application"]
 #        args: ["-w", "5", "-b", "0.0.0.0:30010", "-t",  "200", "pman.wsgi:application"]
         envFrom:
           - configMapRef:
