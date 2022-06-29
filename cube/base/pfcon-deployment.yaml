@@ -23,7 +23,7 @@ spec:
       containers:
         - env:
             - name: COMPUTE_SERVICE_URL
-              value: http://pman:5010/api/v1/
+              value: http://pman:30010/api/v1/
             - name: PFCON_PASSWORD
               value: pfcon1234
             - name: PFCON_USER
