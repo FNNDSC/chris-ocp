@@ -33,7 +33,7 @@ spec:
           image: ghcr.io/fnndsc/pfcon:next-5.0.0.a1.git.154d938
           name: pfcon
           ports:
-            - containerPort: 5005
+            - containerPort: 30005
           command: ["gunicorn", "-w", "5", "-b", "0.0.0.0:30005", "-t",  "200", "pfcon.wsgi:application"]
           resources:
             limits:
