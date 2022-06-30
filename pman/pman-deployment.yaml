@@ -7,7 +7,9 @@ metadata:
   name: pman
 spec:
   replicas: 1
-  strategy: {}
+  strategy:
+    resources: { }
+    type: Recreate
   selector:
     matchLabels:
       app: pman
@@ -19,21 +21,20 @@ spec:
     spec:
       serviceAccountName: pipeline
       containers:
-      - command: ["gunicorn"]
-        args: ["-w", "5", "-b", "0.0.0.0:30010", "-t",  "200", "pman.wsgi:application"]
+      - command: ["gunicorn", "--bind", "0.0.0.0:5010", "--workers", "2", "--timeout", "20", "pman.wsgi:application"]
         envFrom:
           - configMapRef:
               name: chris-secrets-env
-        image: 'fnndsc/pman'
+        image: 'fnndsc/pman:next-4.0.0.a1.git.c245243'
         name: pman
         ports:
-        - containerPort: 5010
+        - containerPort: 30010
         resources:
           limits:
-            cpu: "100m"
+            cpu: "300m"
             memory: "256Mi"
           requests:
-            cpu: "100m"
+            cpu: "300m"
             memory: "256Mi"
         volumeMounts:
         - mountPath: /var/run/docker.sock
